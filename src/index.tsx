@@ -17,6 +17,4 @@ const PropertyEditor = NativeModules.PropertyEditor
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return PropertyEditor.multiply(a, b);
-}
+export default PropertyEditor;
