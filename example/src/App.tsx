@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { Button, Text, TextInput } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PropertyEditor from 'react-native-property-editor';
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +16,11 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} options={{title: 'Welcome'}} />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'Welcome' }}
+          />
           <Stack.Screen name="Set Property" component={SetPropertyScreen} />
           <Stack.Screen name="Get Property" component={GetPropertyScreen} />
         </Stack.Navigator>
@@ -25,26 +29,22 @@ export default function App() {
   );
 }
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   return (
     <>
       <Button
         title="Set Property"
-        onPress={() => 
-          navigation.navigate('Set Property')
-        }
+        onPress={() => navigation.navigate('Set Property')}
       />
       <Button
         title="Get Property"
-        onPress={() => 
-          navigation.navigate('Get Property')
-        }
+        onPress={() => navigation.navigate('Get Property')}
       />
     </>
   );
 };
 
-const SetPropertyScreen = ({navigation}) => {
+const SetPropertyScreen = () => {
   const [text, setText] = React.useState<string | undefined>();
 
   React.useEffect(() => {
@@ -55,20 +55,20 @@ const SetPropertyScreen = ({navigation}) => {
   return (
     <>
       <Text>Input Property Value:</Text>
-      <TextInput 
-        placeholder='Type text here' 
-        onChangeText={newText => setText(newText)} 
-        defaultValue={text} 
+      <TextInput
+        placeholder="Type text here"
+        onChangeText={(newText) => setText(newText)}
+        defaultValue={text}
       />
-      <Button 
-        title='Save' 
-        onPress={() => PropertyEditor.setString('hello', text!)} 
+      <Button
+        title="Save"
+        onPress={() => PropertyEditor.setString('hello', text!)}
       />
     </>
   );
 };
 
-const GetPropertyScreen = ({navigation}) => {
+const GetPropertyScreen = () => {
   const [text, setText] = React.useState<string | undefined>();
 
   React.useEffect(() => {
