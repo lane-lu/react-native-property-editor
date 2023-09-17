@@ -3,9 +3,18 @@ import * as React from 'react';
 import { Button, Text, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import PropertyEditor from 'react-native-property-editor';
 
-const Stack = createNativeStackNavigator();
+type RootStackParamList = {
+  'Home': undefined;
+  'Set Property': undefined;
+  'Get Property': undefined;
+};
+
+type Props = NativeStackScreenProps<RootStackParamList>;
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   React.useEffect(() => {
@@ -29,7 +38,7 @@ export default function App() {
   );
 }
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }: Props) => {
   return (
     <>
       <Button
