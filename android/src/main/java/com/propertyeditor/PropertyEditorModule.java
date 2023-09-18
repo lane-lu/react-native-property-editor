@@ -21,7 +21,7 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   public PropertyEditorModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
-    this.contextName = "default";
+    this.contextName = null;
   }
 
   @Override
@@ -39,7 +39,7 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getNumber(String key, Double defaultValue, Promise promise) {
     Log.d(NAME, "getNumber: " + key);
-    SharedPreferences preferences = reactContext.getSharedPreferences(contextName, Context.MODE_PRIVATE);
+    SharedPreferences preferences = getSharedPreferences(reactContext);
     Float f = preferences.getFloat(key, defaultValue == null ? null : defaultValue.floatValue());
     promise.resolve(f.doubleValue());
   }
@@ -47,7 +47,7 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void setNumber(String key, Double value) {
     Log.d(NAME, "setNumber: " + key + ", " + value);
-    SharedPreferences preferences = reactContext.getSharedPreferences(contextName, Context.MODE_PRIVATE);
+    SharedPreferences preferences = getSharedPreferences(reactContext);
     SharedPreferences.Editor editor = preferences.edit();
     if (value == null) {
       editor.remove(key);
@@ -60,7 +60,7 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getString(String key, String defaultValue, Promise promise) {
     Log.d(NAME, "getString: " + key);
-    SharedPreferences preferences = reactContext.getSharedPreferences(contextName, Context.MODE_PRIVATE);
+    SharedPreferences preferences = getSharedPreferences(reactContext);
     String s = preferences.getString(key, defaultValue);
     promise.resolve(s);
   }
@@ -68,7 +68,7 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void setString(String key, String value) {
     Log.d(NAME, "setString: " + key + ", " + value);
-    SharedPreferences preferences = reactContext.getSharedPreferences(contextName, Context.MODE_PRIVATE);
+    SharedPreferences preferences = getSharedPreferences(reactContext);
     SharedPreferences.Editor editor = preferences.edit();
     if (value == null) {
       editor.remove(key);
@@ -81,7 +81,7 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getBoolean(String key, Boolean defaultValue, Promise promise) {
     Log.d(NAME, "getBoolean: " + key);
-    SharedPreferences preferences = reactContext.getSharedPreferences(contextName, Context.MODE_PRIVATE);
+    SharedPreferences preferences = getSharedPreferences(reactContext);
     Boolean b = preferences.getBoolean(key, defaultValue);
     promise.resolve(b);
   }
@@ -89,7 +89,7 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void setBoolean(String key, Boolean value) {
     Log.d(NAME, "setBoolean: " + key + ", " + value);
-    SharedPreferences preferences = reactContext.getSharedPreferences(contextName, Context.MODE_PRIVATE);
+    SharedPreferences preferences = getSharedPreferences(reactContext);
     SharedPreferences.Editor editor = preferences.edit();
     if (value == null) {
       editor.remove(key);
@@ -97,5 +97,17 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
       editor.putBoolean(key, value);
     }
     editor.apply();
+  }
+
+  private SharedPreferences getSharedPreferences(Context context) {
+    return context.getSharedPreferences(getSharedPreferencesName(context), getSharedPreferencesMode());
+  }
+
+  private String getSharedPreferencesName(Context context) {
+    return contextName == null ? context.getPackageName() + "_preferences" : contextName;
+  }
+
+  private int getSharedPreferencesMode() {
+    return Context.MODE_PRIVATE;
   }
 }
