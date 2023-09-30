@@ -37,10 +37,10 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void getNumber(String key, Double defaultValue, Promise promise) {
+  public void getNumber(String key, Promise promise) {
     Log.d(NAME, "getNumber: " + key);
     SharedPreferences preferences = getSharedPreferences(reactContext);
-    Float f = preferences.getFloat(key, defaultValue == null ? null : defaultValue.floatValue());
+    Float f = preferences.getFloat(key, 0F);
     promise.resolve(f.doubleValue());
   }
 
@@ -58,10 +58,10 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void getString(String key, String defaultValue, Promise promise) {
+  public void getString(String key, Promise promise) {
     Log.d(NAME, "getString: " + key);
     SharedPreferences preferences = getSharedPreferences(reactContext);
-    String s = preferences.getString(key, defaultValue);
+    String s = preferences.getString(key, null);
     promise.resolve(s);
   }
 
@@ -79,10 +79,10 @@ public class PropertyEditorModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void getBoolean(String key, Boolean defaultValue, Promise promise) {
+  public void getBoolean(String key, Promise promise) {
     Log.d(NAME, "getBoolean: " + key);
     SharedPreferences preferences = getSharedPreferences(reactContext);
-    Boolean b = preferences.getBoolean(key, defaultValue);
+    Boolean b = preferences.getBoolean(key, Boolean.FALSE);
     promise.resolve(b);
   }
 

@@ -6,9 +6,9 @@ class PropertyEditor: NSObject {
         print("setContextName", contextName)
     }
 
-    @objc(getNumber:defaultValue:withResolver:withRejecter:)
-    func getNumber(key: String, defaultValue: Double, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        print("getNumber", key, defaultValue)
+    @objc(getNumber:withResolver:withRejecter:)
+    func getNumber(key: String, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        print("getNumber", key)
         let value: Double = UserDefaults.standard.double(forKey: key)
         resolve(value)
     }
@@ -19,15 +19,11 @@ class PropertyEditor: NSObject {
         UserDefaults.standard.set(value, forKey: key)
     }
     
-    @objc(getString:defaultValue:withResolver:withRejecter:)
-    func getString(key: String, defaultValue: String, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        print("getString", key, defaultValue)
+    @objc(getString:withResolver:withRejecter:)
+    func getString(key: String, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        print("getString", key)
         let value: String? = UserDefaults.standard.string(forKey: key)
-        if let s = value {
-            resolve(s)
-        } else {
-            resolve(defaultValue)
-        }
+        resolve(value)
     }
     
     @objc(setString:value:)
@@ -36,9 +32,9 @@ class PropertyEditor: NSObject {
         UserDefaults.standard.set(value, forKey: key)
     }
     
-    @objc(getBoolean:defaultValue:withResolver:withRejecter:)
-    func getBoolean(key: String, defaultValue: Bool, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
-        print("getBoolean", key, defaultValue)
+    @objc(getBoolean:withResolver:withRejecter:)
+    func getBoolean(key: String, resolve:RCTPromiseResolveBlock, reject:RCTPromiseRejectBlock) -> Void {
+        print("getBoolean", key)
         let value: Bool = UserDefaults.standard.bool(forKey: key)
         resolve(value)
     }

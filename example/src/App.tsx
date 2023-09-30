@@ -58,7 +58,7 @@ const SetPropertyScreen = () => {
 
   React.useEffect(() => {
     console.log('SetPropertyScreen');
-    PropertyEditor.getString('hello', 'N/A').then(setText);
+    PropertyEditor.getString('text').then(setText);
   }, []);
 
   return (
@@ -71,7 +71,7 @@ const SetPropertyScreen = () => {
       />
       <Button
         title="Save"
-        onPress={() => PropertyEditor.setString('hello', text!)}
+        onPress={() => PropertyEditor.setString('text', text ? text! : 'n/a')}
       />
     </>
   );
@@ -82,7 +82,7 @@ const GetPropertyScreen = () => {
 
   React.useEffect(() => {
     console.log('GetPropertyScreen');
-    PropertyEditor.getString('hello', 'world').then(setText);
+    PropertyEditor.getString('text').then(setText);
   }, []);
 
   return (

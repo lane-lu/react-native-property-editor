@@ -22,7 +22,7 @@ import PropertyEditor from 'react-native-property-editor';
 
 const [text, setText] = React.useState<string | undefined>();
 
-PropertyEditor.getString('prop-key', 'default-value').then(setText);
+PropertyEditor.getString('prop-key').then(setText);
 
 // ...
 
@@ -38,11 +38,11 @@ PropertyEditor.getString('prop-key', 'default-value').then(setText);
 | Callback Name | Description | Parameters |
 | --- | --- | --- |
 | setContextName | Set context name (Has no effect on iOS) | contextName: string |
-| getNumber | Get number value | key: string, defauleValue: number |
+| getNumber | Get number value. If the value is absent 0 will be returned | key: string |
 | setNumber | Set number value | key: string, value: number |
-| getString | Get string value | key: string, defaultValue: string |
+| getString | Get string value. If the value is absent undefined will be returned | key: string |
 | setString | Set string value | key: string, value: string |
-| getBoolean | Get boolean value | key: string, defaultValue: bool |
+| getBoolean | Get boolean value. If the value is absent false will be returned | key: string |
 | setBoolean | Set boolean value | key: string, value: bool |
 
 ## License
