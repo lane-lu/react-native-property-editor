@@ -14,9 +14,9 @@ class PropertyEditor: NSObject {
     }
     
     @objc(setNumber:value:)
-    func setNumber(key: String, value: Double) -> Void {
-        print("setNumber", key, value)
-        UserDefaults.standard.set(value, forKey: key)
+    func setNumber(key: String, value: NSNumber) -> Void {
+        print("setNumber", key, value.doubleValue)
+        UserDefaults.standard.set(value.doubleValue, forKey: key)
     }
     
     @objc(getString:withResolver:withRejecter:)
