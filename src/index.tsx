@@ -30,6 +30,7 @@ export async function getNumber(key: string): Promise<number> {
 }
 
 export function setNumber(key: string, value: number): void {
+  console.log('setNumber', key, value);
   NativeInterface.setNumber(key, value);
 }
 
@@ -47,7 +48,7 @@ export function setString(key: string, value: string): void {
 
 export async function getBoolean(key: string): Promise<boolean> {
   return new Promise<boolean>((resolve, reject) => {
-    NativeInterface.getString(key)
+    NativeInterface.getBoolean(key)
       .then((result: boolean) => resolve(result))
       .catch((error: any) => reject(error));
   });
