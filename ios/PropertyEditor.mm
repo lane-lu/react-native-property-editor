@@ -8,7 +8,7 @@ RCT_EXTERN_METHOD(getNumber:(NSString *)key defaultValue:(NSNumber *)defaultValu
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(setNumber:(NSString *)key value:(NSNumber *)value)
+RCT_EXTERN_METHOD(setNumber:(NSString *)key value:(nonnull NSNumber *)value)
 
 RCT_EXTERN_METHOD(getString:(NSString *)key defaultValue:(NSString *)defaultValue
                  withResolver:(RCTPromiseResolveBlock)resolve
